@@ -1,9 +1,58 @@
 {
   "phases": [
     "first",
-    "change"
+    "change",
+    "settled"
   ],
   "routes": [
+    {
+      "path": "/timetable",
+      "method": "GET",
+      "status": 200,
+      "phase": "settled",
+      "params": {
+        "channel": "B",
+        "day": "2026-12-09"
+      },
+      "data": [
+        {
+          "channel": "B",
+          "day": "2026-12-09",
+          "card": "河口联程",
+          "gates": [
+            "H-03",
+            "H-04"
+          ],
+          "leg": "河西至青崖",
+          "departure": "24:12",
+          "tickets": [
+            "J1",
+            "J5"
+          ],
+          "displayPrice": 8,
+          "limit": "学生",
+          "capacity": 2,
+          "offer": "OF-B-2-R",
+          "journeys": [
+            {
+              "from": "河西",
+              "to": "河口",
+              "arriveGate": "H-03",
+              "leave": "24:12",
+              "arrive": "24:24"
+            },
+            {
+              "from": "河口",
+              "to": "青崖",
+              "departGate": "H-04",
+              "leave": "24:31",
+              "arrive": "24:55"
+            }
+          ],
+          "quoteKind": "available"
+        }
+      ]
+    },
     {
       "path": "/timetable",
       "method": "GET",
@@ -28,7 +77,25 @@
           ],
           "displayPrice": 8,
           "limit": "学生",
-          "capacity": 0
+          "capacity": 0,
+          "offer": "OF-A-2",
+          "journeys": [
+            {
+              "from": "河西",
+              "to": "河口",
+              "arriveGate": "H-01",
+              "leave": "24:12",
+              "arrive": "24:24"
+            },
+            {
+              "from": "河口",
+              "to": "青崖",
+              "departGate": "H-02",
+              "leave": "24:31",
+              "arrive": "24:55"
+            }
+          ],
+          "quoteKind": "display_only"
         },
         {
           "channel": "A",
@@ -46,7 +113,25 @@
           ],
           "displayPrice": 9,
           "limit": "成人",
-          "capacity": 1
+          "capacity": 1,
+          "offer": "OF-A-4",
+          "journeys": [
+            {
+              "from": "河西",
+              "to": "河口",
+              "arriveGate": "H-03",
+              "leave": "24:20",
+              "arrive": "24:29"
+            },
+            {
+              "from": "河口",
+              "to": "青崖",
+              "departGate": "H-04",
+              "leave": "24:42",
+              "arrive": "24:55"
+            }
+          ],
+          "quoteKind": "available"
         }
       ]
     },
@@ -76,7 +161,25 @@
           ],
           "displayPrice": 8,
           "limit": "学生",
-          "capacity": 2
+          "capacity": 2,
+          "offer": "OF-B-2-R",
+          "journeys": [
+            {
+              "from": "河西",
+              "to": "河口",
+              "arriveGate": "H-03",
+              "leave": "24:12",
+              "arrive": "24:24"
+            },
+            {
+              "from": "河口",
+              "to": "青崖",
+              "departGate": "H-04",
+              "leave": "24:31",
+              "arrive": "24:55"
+            }
+          ],
+          "quoteKind": "available"
         }
       ]
     },
@@ -105,7 +208,25 @@
           ],
           "displayPrice": 8,
           "limit": "学生",
-          "capacity": 2
+          "capacity": 2,
+          "offer": "OF-B-2",
+          "journeys": [
+            {
+              "from": "河西",
+              "to": "河口",
+              "arriveGate": "H-01",
+              "leave": "24:12",
+              "arrive": "24:24"
+            },
+            {
+              "from": "河口",
+              "to": "青崖",
+              "departGate": "H-02",
+              "leave": "24:31",
+              "arrive": "24:55"
+            }
+          ],
+          "quoteKind": "available"
         }
       ]
     },
@@ -144,6 +265,25 @@
       "path": "/book/active",
       "method": "GET",
       "status": 200,
+      "phase": "settled",
+      "data": [
+        {
+          "journey": "JD2",
+          "quote": "RQ-19",
+          "channel": "B",
+          "state": "expired",
+          "expires": "2026-12-10T00:09:00+08:00",
+          "gates": [
+            "H-01",
+            "H-02"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/book/active",
+      "method": "GET",
+      "status": 200,
       "data": [
         {
           "journey": "JD2",
@@ -164,13 +304,50 @@
       "status": 202,
       "expectedBody": {
         "channel": "A",
-        "journey": "JD4"
+        "journey": "JD4",
+        "offer": "OF-A-4"
       },
       "receipt": {
         "quote": "RQ-22",
         "state": "held",
         "expires": "2026-12-10T00:17:00+08:00"
       }
+    },
+    {
+      "path": "/book/time",
+      "method": "GET",
+      "status": 200,
+      "phase": "settled",
+      "data": {
+        "asOf": "2026-12-10T00:10:00+08:00"
+      }
+    },
+    {
+      "path": "/book/time",
+      "method": "GET",
+      "status": 200,
+      "data": {
+        "asOf": "2026-12-10T00:05:00+08:00"
+      }
+    },
+    {
+      "path": "/fare/interchange",
+      "method": "GET",
+      "status": 200,
+      "data": [
+        {
+          "arriveGate": "H-01",
+          "departGate": "H-02",
+          "access": "inside",
+          "minMinutes": 5
+        },
+        {
+          "arriveGate": "H-03",
+          "departGate": "H-04",
+          "access": "outside",
+          "minMinutes": 11
+        }
+      ]
     }
   ],
   "forms": [
@@ -209,6 +386,10 @@
         [
           "journey",
           "行程号"
+        ],
+        [
+          "offer",
+          "报价项"
         ]
       ],
       "source": "/timetable",
@@ -221,7 +402,10 @@
         "tickets",
         "displayPrice",
         "limit",
-        "capacity"
+        "capacity",
+        "offer",
+        "journeys",
+        "quoteKind"
       ],
       "action": "/buy/hold"
     }
