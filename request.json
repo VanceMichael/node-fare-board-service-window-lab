@@ -1,0 +1,22 @@
+{
+  "serviceDay": "2026-12-09",
+  "route": [
+    "河西",
+    "河口",
+    "青崖"
+  ],
+  "journeys": [
+    {
+      "id": "JD2",
+      "passenger": "学生",
+      "access": "inside",
+      "at": "24:12"
+    },
+    {
+      "id": "JD4",
+      "passenger": "成人",
+      "access": "outside",
+      "at": "24:20"
+    }
+  ]
+}

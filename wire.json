@@ -1,0 +1,229 @@
+{
+  "phases": [
+    "first",
+    "change"
+  ],
+  "routes": [
+    {
+      "path": "/timetable",
+      "method": "GET",
+      "status": 200,
+      "params": {
+        "channel": "A",
+        "day": "2026-12-09"
+      },
+      "data": [
+        {
+          "channel": "A",
+          "day": "2026-12-09",
+          "card": "河口联程",
+          "gates": [
+            "H-01",
+            "H-02"
+          ],
+          "leg": "河西至青崖",
+          "departure": "24:12",
+          "tickets": [
+            "J2"
+          ],
+          "displayPrice": 8,
+          "limit": "学生",
+          "capacity": 0
+        },
+        {
+          "channel": "A",
+          "day": "2026-12-09",
+          "card": "河口联程",
+          "gates": [
+            "H-03",
+            "H-04"
+          ],
+          "leg": "河西至青崖",
+          "departure": "24:20",
+          "tickets": [
+            "J3",
+            "J4"
+          ],
+          "displayPrice": 9,
+          "limit": "成人",
+          "capacity": 1
+        }
+      ]
+    },
+    {
+      "path": "/timetable",
+      "method": "GET",
+      "status": 200,
+      "phase": "change",
+      "params": {
+        "channel": "B",
+        "day": "2026-12-09"
+      },
+      "data": [
+        {
+          "channel": "B",
+          "day": "2026-12-09",
+          "card": "河口联程",
+          "gates": [
+            "H-03",
+            "H-04"
+          ],
+          "leg": "河西至青崖",
+          "departure": "24:12",
+          "tickets": [
+            "J1",
+            "J5"
+          ],
+          "displayPrice": 8,
+          "limit": "学生",
+          "capacity": 2
+        }
+      ]
+    },
+    {
+      "path": "/timetable",
+      "method": "GET",
+      "status": 200,
+      "params": {
+        "channel": "B",
+        "day": "2026-12-09"
+      },
+      "data": [
+        {
+          "channel": "B",
+          "day": "2026-12-09",
+          "card": "河口联程",
+          "gates": [
+            "H-01",
+            "H-02"
+          ],
+          "leg": "河西至青崖",
+          "departure": "24:12",
+          "tickets": [
+            "J1",
+            "J5"
+          ],
+          "displayPrice": 8,
+          "limit": "学生",
+          "capacity": 2
+        }
+      ]
+    },
+    {
+      "path": "/fare/business",
+      "method": "GET",
+      "status": 200,
+      "data": [
+        {
+          "canUse": "inside",
+          "required": [
+            "H-01",
+            "H-02"
+          ],
+          "discount": "学生",
+          "offerBy": [
+            "A",
+            "B"
+          ]
+        },
+        {
+          "canUse": "outside",
+          "required": [
+            "H-03",
+            "H-04"
+          ],
+          "discount": null,
+          "offerBy": [
+            "A",
+            "B"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/book/active",
+      "method": "GET",
+      "status": 200,
+      "data": [
+        {
+          "journey": "JD2",
+          "quote": "RQ-19",
+          "channel": "B",
+          "state": "awaiting_payment",
+          "expires": "2026-12-10T00:09:00+08:00",
+          "gates": [
+            "H-01",
+            "H-02"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/buy/hold",
+      "method": "POST",
+      "status": 202,
+      "expectedBody": {
+        "channel": "A",
+        "journey": "JD4"
+      },
+      "receipt": {
+        "quote": "RQ-22",
+        "state": "held",
+        "expires": "2026-12-10T00:17:00+08:00"
+      }
+    }
+  ],
+  "forms": [
+    {
+      "title": "夜间列车报价",
+      "query": [
+        [
+          "channel",
+          "售票终端",
+          [
+            [
+              "A",
+              "线网甲"
+            ],
+            [
+              "B",
+              "线网乙"
+            ]
+          ]
+        ],
+        [
+          "day",
+          "服务日",
+          null
+        ]
+      ],
+      "fields": [
+        [
+          "requestId",
+          "请求号"
+        ],
+        [
+          "channel",
+          "渠道"
+        ],
+        [
+          "journey",
+          "行程号"
+        ]
+      ],
+      "source": "/timetable",
+      "columns": [
+        "channel",
+        "day",
+        "card",
+        "gates",
+        "departure",
+        "tickets",
+        "displayPrice",
+        "limit",
+        "capacity"
+      ],
+      "action": "/buy/hold"
+    }
+  ]
+}
